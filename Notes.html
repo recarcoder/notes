@@ -1,0 +1,84 @@
+<html>
+<head>
+<meta width="device-width">
+</head>
+<body>
+  <input id="inpt" type="text">
+  <button onclick="clr()" class="cl">clear</button>
+  <br>
+  <button id="bt">save</button>
+  <br>
+  <h id="div">
+  </h>
+  <style>
+    input {
+      margin: 0;
+      margin-bottom: 10px;
+      width: 300px;
+      height: 30px;
+      border-width: 2px;
+      border-radius: 2px;
+    }
+    .cl {
+      margin: 0;
+      height: 30px;
+      width: 80px;
+      margin-left: 20px;
+      margin-bottom: 10px;
+      background-color: rgba(252,51,15,0.868);
+    }
+    button {
+      margin-bottom: 20px;
+      background-color: rgba(49,162,64,0.862);
+      border: 0;
+      border-radius: 2px;
+      height: 30px;
+      width: 80px;
+      font-size: 20px;
+      color: white;
+    }
+    h {
+      color: rgba(225,80,244,0.862);
+      font-size: 15px;
+    }
+    li {
+      list-style: none;
+    }
+    li a {
+      color: rgba(166,25,235,0.862);
+      padding: 5px;
+    }
+  </style>
+  <script>
+    var c = [];
+    var t = [];
+    var btn = document.getElementById('bt');
+    var inpt = document.getElementById('inpt');
+    var dev = document.getElementById('div');
+    if ((localStorage.getItem('let') === null) === false) {
+      var fi = localStorage.getItem('let').split(" ");
+      for (p = 0; p < fi.length; p++) {
+        dev.innerHTML += `<li>
+        <a target='_blanck' href='https://${fi[p]}'>${fi[p]}</a>
+        </li><br>`;
+      }}
+    dev.innerHTML = dev.innerHTML.replace(' ', '<br>');
+    btn.addEventListener("click", function() {
+      c.push(inpt.value);
+      t.push(inpt.value);
+      for (i = 0; i < c.length; i++) {
+        dev.innerHTML += `<li>
+        <a target='_blanck' href='https://${c[i]}'>${c[i]}</a>
+        </li>`;
+        c.shift();
+      }
+      console.log(dev.innerText);
+      localStorage.setItem("let", dev.innerText);
+    })
+    function clr() {
+      localStorage.clear();
+      dev.innerHTML = '';
+    }
+  </script>
+</body>
+</html>
